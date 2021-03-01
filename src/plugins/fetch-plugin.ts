@@ -27,8 +27,9 @@ export const fetchPlugin = (input: string) => {
                 }
 
                 const { data, request } = await axios.get(args.path);
+                const loader = args.path.match(/.css$/) ? 'css' : 'jsx';
                 const result: esbuild.OnLoadResult = {
-                    loader: "jsx",
+                    loader: loader,
                     contents: data,
                     resolveDir: new URL('./', request.responseURL).pathname
                 };
